@@ -1,138 +1,94 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Medical Profile</title>
 
-    <link rel="stylesheet" href="style.css">
-</head>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
 
-<body>
-
+  <body>
     <div class="phone">
+      <div class="header">Medical Profile</div>
 
-        <div class="header">
-            Medical Profile
+      <div class="form">
+        <h3>Enter Patient Details</h3>
+
+        <input id="name" placeholder="Full Name" />
+
+        <input id="age" type="number" placeholder="Age" />
+
+        <input id="blood" placeholder="Blood Group" />
+
+        <input id="contactName" placeholder="Emergency Contact Name" />
+
+        <input id="contactNumber" placeholder="Emergency Contact Number" />
+
+        <textarea id="history" placeholder="Medical History"></textarea>
+
+        <textarea id="medications" placeholder="Medications"></textarea>
+
+        <button onclick="saveData()">Save Details</button>
+      </div>
+
+      <div class="profile">
+        <div class="avatar">👤</div>
+
+        <h2 id="displayName">Patient Name</h2>
+
+        <div class="status">● Health Profile</div>
+      </div>
+
+      <div class="section-title">Medical Details</div>
+
+      <div class="grid">
+        <div class="card">
+          <small>Blood Group</small>
+          <div class="value" id="displayBlood">--</div>
         </div>
 
-        <div class="form">
-
-            <h3>Enter Patient Details</h3>
-
-            <input id="name" placeholder="Full Name">
-
-            <input id="age" type="number" placeholder="Age">
-
-            <input id="blood" placeholder="Blood Group">
-
-            <input id="contactName" placeholder="Emergency Contact Name">
-
-            <input id="contactNumber" placeholder="Emergency Contact Number">
-
-            <textarea id="history" placeholder="Medical History"></textarea>
-
-            <textarea id="medications" placeholder="Medications"></textarea>
-
-            <button onclick="saveData()">
-                Save Details
-            </button>
-
+        <div class="card">
+          <small>Age</small>
+          <div class="value" id="displayAge">--</div>
         </div>
+      </div>
 
-        <div class="profile">
+      <div class="single-card">
+        <h4>Medical History</h4>
 
-            <div class="avatar">
-                👤
-            </div>
+        <p id="displayHistory">No medical history added.</p>
+      </div>
 
-            <h2 id="displayName">Patient Name</h2>
+      <div class="single-card">
+        <h4>Medications</h4>
 
-            <div class="status">
-                ● Health Profile
-            </div>
+        <p id="displayMedication">No medications added.</p>
+      </div>
 
-        </div>
+      <div class="section-title">Emergency Contact</div>
 
-        <div class="section-title">
-            Medical Details
-        </div>
+      <div class="single-card">
+        <h4 id="displayContactName">Not Added</h4>
 
-        <div class="grid">
+        <p id="displayContactNumber">---------</p>
+      </div>
 
-            <div class="card">
-                <small>Blood Group</small>
-                <div class="value" id="displayBlood">--</div>
-            </div>
+      <div class="download">
+        <button onclick="window.print()">Download Health Report (PDF)</button>
+      </div>
 
-            <div class="card">
-                <small>Age</small>
-                <div class="value" id="displayAge">--</div>
-            </div>
+      <div class="bottom">
+        <div>🏠<br />Home</div>
 
-        </div>
+        <div>💊<br />Medicine</div>
 
-        <div class="single-card">
+        <div>📅<br />Schedule</div>
 
-            <h4>Medical History</h4>
-
-            <p id="displayHistory">
-                No medical history added.
-            </p>
-
-        </div>
-
-        <div class="single-card">
-
-            <h4>Medications</h4>
-
-            <p id="displayMedication">
-                No medications added.
-            </p>
-
-        </div>
-
-        <div class="section-title">
-            Emergency Contact
-        </div>
-
-        <div class="single-card">
-
-            <h4 id="displayContactName">
-                Not Added
-            </h4>
-
-            <p id="displayContactNumber">
-                ---------
-            </p>
-
-        </div>
-
-        <div class="download">
-
-            <button onclick="window.print()">
-                Download Health Report (PDF)
-            </button>
-
-        </div>
-
-        <div class="bottom">
-
-            <div>🏠<br>Home</div>
-
-            <div>💊<br>Medicine</div>
-
-            <div>📅<br>Schedule</div>
-
-            <div>👤<br>Profile</div>
-
-        </div>
-
+        <div>👤<br />Profile</div>
+      </div>
     </div>
 
-    <script src="script.js"></script>
-
-</body>
-
+    <script src="js/script.js"></script>
+  </body>
 </html>

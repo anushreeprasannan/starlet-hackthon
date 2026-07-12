@@ -1,42 +1,39 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Daily Reminder</title>
 
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-<div class="container">
-
-    <div class="header">
+    <link rel="stylesheet" href="css/reminder.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
         <h1>Daily Reminder</h1>
         <p>Set reminders that repeat every day</p>
-    </div>
+      </div>
 
-    <div class="card">
-
+      <div class="card">
         <h2>Add Reminder</h2>
 
-        <input type="text" id="title" placeholder="Reminder Title">
+        <input type="text" id="title" placeholder="Reminder Title" />
 
-        <input type="time" id="time">
+        <input type="time" id="time" />
 
-        <textarea id="description" placeholder="Description (Optional)"></textarea>
+        <textarea
+          id="description"
+          placeholder="Description (Optional)"
+        ></textarea>
 
         <button onclick="saveReminder()">Save Reminder</button>
+      </div>
 
+      <h2 class="heading">Saved Reminders</h2>
+
+      <div id="list"></div>
     </div>
 
-    <h2 class="heading">Saved Reminders</h2>
-
-    <div id="list"></div>
-
-</div>
-
-<script src="reminder.js"></script>
-
-</body>
+    <script src="js/reminder.js"></script>
+  </body>
 </html>

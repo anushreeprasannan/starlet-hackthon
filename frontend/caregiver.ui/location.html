@@ -1,73 +1,61 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>Live Location Tracker</title>
+    <title>Live Location Tracker</title>
 
-<!-- Leaflet CSS -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <!-- Leaflet CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
 
-<!-- Custom CSS -->
-<link rel="stylesheet" href="location.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="location.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>📍 Live Location</header>
 
-</head>
-<body>
+      <div id="map"></div>
 
-<div class="container">
-
-    <header>
-        📍 Live Location
-    </header>
-
-    <div id="map"></div>
-
-    <div class="info-card">
-
+      <div class="info-card">
         <h3>Current Location</h3>
 
         <div class="details">
+          <div class="box">
+            <h4>Latitude</h4>
+            <p id="latitude">Loading...</p>
+          </div>
 
-            <div class="box">
-                <h4>Latitude</h4>
-                <p id="latitude">Loading...</p>
-            </div>
-
-            <div class="box">
-                <h4>Longitude</h4>
-                <p id="longitude">Loading...</p>
-            </div>
-
+          <div class="box">
+            <h4>Longitude</h4>
+            <p id="longitude">Loading...</p>
+          </div>
         </div>
 
         <div class="details">
+          <div class="box">
+            <h4>Accuracy</h4>
+            <p id="accuracy">Loading...</p>
+          </div>
 
-            <div class="box">
-                <h4>Accuracy</h4>
-                <p id="accuracy">Loading...</p>
-            </div>
-
-            <div class="box">
-                <h4>Status</h4>
-                <p id="status">Waiting...</p>
-            </div>
-
+          <div class="box">
+            <h4>Status</h4>
+            <p id="status">Waiting...</p>
+          </div>
         </div>
 
-        <button onclick="getLocation()">
-            Refresh Location
-        </button>
-
+        <button onclick="getLocation()">Refresh Location</button>
+      </div>
     </div>
 
-</div>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-<!-- Leaflet JS -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-<!-- Custom JS -->
-<script src="location.js"></script>
-
-</body>
+    <!-- Custom JS -->
+    <script src="js/location.js"></script>
+  </body>
 </html>

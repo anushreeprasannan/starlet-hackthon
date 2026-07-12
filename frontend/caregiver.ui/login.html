@@ -1,78 +1,56 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Guardian Angel Login</title>
 
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="css/login.css" />
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-</head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<body>
-
+  <body>
     <div class="container">
+      <div class="top">
+        <div class="logo">🛡</div>
 
-        <div class="top">
+        <h1>Guardian Angel</h1>
 
-            <div class="logo">
-                🛡
-            </div>
+        <p>EMPATHETIC PROTECTION</p>
+      </div>
 
-            <h1>Guardian Angel</h1>
+      <div class="form">
+        <div class="inputBox">
+          <label>Email Address</label>
 
-            <p>EMPATHETIC PROTECTION</p>
+          <div class="inputField">
+            <span>✉</span>
 
+            <input type="email" placeholder="name@email.com" />
+          </div>
         </div>
 
-        <div class="form">
+        <div class="inputBox">
+          <label>Password</label>
 
-            <div class="inputBox">
+          <div class="inputField">
+            <span>🔒</span>
 
-                <label>Email Address</label>
-
-                <div class="inputField">
-
-                    <span>✉</span>
-
-                    <input type="email" placeholder="name@email.com">
-
-                </div>
-
-            </div>
-
-            <div class="inputBox">
-
-                <label>Password</label>
-
-                <div class="inputField">
-
-                    <span>🔒</span>
-
-                    <input type="password" placeholder="••••••••">
-
-                </div>
-
-            </div>
-
-            <button id="loginBtn">
-                Login ➜
-            </button>
-
-            <a href="#" class="register">
-                REGISTER NEW ACCOUNT
-            </a>
-
+            <input type="password" placeholder="••••••••" />
+          </div>
         </div>
 
+        <button id="loginBtn">Login ➜</button>
+
+        <a href="#" class="register"> REGISTER NEW ACCOUNT </a>
+      </div>
     </div>
 
-<script src="login.js"></script>
-
-</body>
+    <script src="js/login.js"></script>
+  </body>
 </html>
-
