@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SafeHer Watch — Home</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      .grid {
+        width: 100%;
+        height: 100%;
+        padding: 44px 12px 12px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto auto;
+        gap: 9px;
+      }
+      .tile {
+        appearance: none;
+        border: none;
+        cursor: pointer;
+        border-radius: 22px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 14px 8px;
+        font-family: inherit;
+        color: #fff;
+        text-align: center;
+        transition:
+          transform 0.12s ease,
+          filter 0.12s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .tile:active {
+        transform: scale(0.94);
+        filter: brightness(0.9);
+      }
+      .tile:focus-visible {
+        outline: 2px solid #fff;
+        outline-offset: 2px;
+      }
+      .tile svg {
+        width: 28px;
+        height: 28px;
+      }
+      .tile-label {
+        font-size: 12.5px;
+        font-weight: 700;
+        line-height: 1.2;
+      }
+
+      .tile-mail {
+        grid-column: 1;
+        grid-row: 1;
+        background: linear-gradient(
+          155deg,
+          #8b7bf5,
+          var(--purple) 55%,
+          var(--purple-dark)
+        );
+      }
+      .tile-remind {
+        grid-column: 2;
+        grid-row: 1;
+        background: linear-gradient(
+          155deg,
+          #ffc266,
+          var(--orange) 55%,
+          var(--orange-dark)
+        );
+      }
+      .tile-sos {
+        grid-column: 1 / span 2;
+        grid-row: 2;
+        background: linear-gradient(
+          155deg,
+          #ff5347,
+          var(--red) 55%,
+          var(--red-dark)
+        );
+        flex-direction: row;
+        gap: 12px;
+        padding: 14px 18px;
+        box-shadow: 0 10px 22px -8px rgba(255, 59, 48, 0.55);
+      }
+      .tile-sos .sos-word {
+        font-size: 22px;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+      }
+      .tile-sos .sos-sub {
+        font-size: 11.5px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.85);
+      }
+      .tile-sos .sos-text {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1px;
+      }
+
+      .tile-settings {
+        grid-column: 1 / span 2;
+        grid-row: 3;
+        background: var(--tile-dark);
+        flex-direction: row;
+        gap: 10px;
+        padding: 12px;
+      }
+      .tile-settings:active {
+        filter: brightness(1.3);
+      }
+      .tile-settings .tile-label {
+        font-size: 13.5px;
+      }
+
+      /* subtle sos pulse ring to invite attention, matches emergency framing */
+      .tile-sos::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 22px;
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.35);
+        animation: sosPulse 2.6s ease-out infinite;
+        pointer-events: none;
+      }
+      @keyframes sosPulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.28);
+        }
+        70% {
+          box-shadow: 0 0 0 14px rgba(255, 255, 255, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .tile-sos::after {
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-home">
+    <div class="ambient">
+      <span class="b1"></span><span class="b2"></span><span class="b3"></span>
+    </div>
+
+    <div class="watch">
+      <div class="screen">
+        <div class="statusbar">
+          <span data-clock>10:30 AM</span>
+          <span class="battery">
+            <span class="battery-body"
+              ><span class="battery-fill" data-battery-fill></span
+            ></span>
+            <span class="battery-tip"></span>
+          </span>
+        </div>
+
+        <div class="grid">
+          <button
+            class="tile tile-mail"
+            onclick="SafeHer.go('voice-message.html')"
+            aria-label="Send voice mail to admin"
+          >
+            <svg viewBox="0 0 24 24" fill="none">
+              <path
+                d="M3 6.5A2.5 2.5 0 0 1 5.5 4h13A2.5 2.5 0 0 1 21 6.5v11a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5v-11Z"
+                stroke="#fff"
+                stroke-width="1.8"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M4 7l7.35 5.51a1 1 0 0 0 1.2 0L20 7"
+                stroke="#fff"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <span class="tile-label">Send Mail to<br />Admin</span>
+          </button>
+
+          <button
+            class="tile tile-remind"
+            onclick="SafeHer.go('reminder.html')"
+            aria-label="Open reminders"
+          >
+            <svg viewBox="0 0 24 24" fill="none">
+              <path
+                d="M18 8a6 6 0 1 0-12 0c0 4.5-1.5 6-1.5 6h15S18 12.5 18 8Z"
+                stroke="#fff"
+                stroke-width="1.8"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M13.7 20a2 2 0 0 1-3.4 0"
+                stroke="#fff"
+                stroke-width="1.8"
+                stroke-linecap="round"
+              />
+            </svg>
+            <span class="tile-label">Reminders</span>
+          </button>
+
+          <button
+            class="tile tile-sos"
+            onclick="SafeHer.go('sos.html')"
+            aria-label="Open emergency SOS"
+          >
+            <span class="sos-text">
+              <span class="sos-word">SOS</span>
+              <span class="sos-sub">Emergency SOS</span>
+            </span>
+          </button>
+
+          <button
+            class="tile tile-settings"
+            onclick="openSettings()"
+            aria-label="Settings"
+          >
+            <svg viewBox="0 0 24 24" fill="none">
+              <path
+                d="M12 15.2a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4Z"
+                stroke="#fff"
+                stroke-width="1.7"
+              />
+              <path
+                d="M19.8 13.2a1.6 1.6 0 0 0 .3 1.76l.05.06a1.9 1.9 0 1 1-2.7 2.7l-.05-.05a1.6 1.6 0 0 0-1.76-.3 1.6 1.6 0 0 0-.96 1.45v.15a1.9 1.9 0 1 1-3.8 0v-.08a1.6 1.6 0 0 0-1.04-1.46 1.6 1.6 0 0 0-1.76.3l-.05.05a1.9 1.9 0 1 1-2.7-2.7l.05-.05a1.6 1.6 0 0 0 .3-1.76 1.6 1.6 0 0 0-1.45-.96H4a1.9 1.9 0 1 1 0-3.8h.08A1.6 1.6 0 0 0 5.54 7.5a1.6 1.6 0 0 0-.3-1.76l-.05-.05a1.9 1.9 0 1 1 2.7-2.7l.05.05a1.6 1.6 0 0 0 1.76.3h.07a1.6 1.6 0 0 0 .96-1.45V1.7a1.9 1.9 0 1 1 3.8 0v.08a1.6 1.6 0 0 0 .96 1.45h.07a1.6 1.6 0 0 0 1.76-.3l.05-.05a1.9 1.9 0 1 1 2.7 2.7l-.05.05a1.6 1.6 0 0 0-.3 1.76v.07a1.6 1.6 0 0 0 1.45.96h.15a1.9 1.9 0 1 1 0 3.8h-.08a1.6 1.6 0 0 0-1.45.96Z"
+                stroke="#fff"
+                stroke-width="1.3"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <span class="tile-label">Settings</span>
+          </button>
+        </div>
+
+        <div class="toast" data-toast>
+          <span class="dot"></span><span data-toast-text></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-caption">
+      SafeHer &nbsp;·&nbsp; tap a tile to open that screen
+    </div>
+
+</section>
+
+<!-- ================================= -->
+
+<!-- SUCCESS POPUP -->
+
+<!-- ================================= -->
+
+<div
+id="successPopup"
+class="success-popup">
+
+<div class="popup-card">
+
+<i class="fa-solid fa-circle-check"></i>
+
+<h2>
+
+Emergency Alert Sent
+
+</h2>
+
+<p>
+
+Your caregivers have been notified successfully.
+
+</p>
+
+<button
+onclick="closePopup()">
+
+OK
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<!-- LOADING SCREEN -->
+
+<!-- ================================= -->
+
+<div
+id="loader"
+class="loader-screen">
+
+<div class="spinner"></div>
+
+<p>
+
+Getting your location...
+
+</p>
+
+</div>
+
+</main>
+
+
+
+<nav class="bottom-nav">
+
+<button
+class="nav-btn active"
+onclick="showPage('homePage',this)">
+
+<i class="fa-solid fa-house"></i>
+
+<span>
+
+Home
+
+</span>
+
+</button>
+
+<button
+class="nav-btn"
+onclick="showPage('sosPage',this)">
+
+<i class="fa-solid fa-triangle-exclamation"></i>
+
+<span>
+
+SOS
+
+</span>
+
+</button>
+
+<button
+class="nav-btn"
+onclick="showPage('voicePage',this)">
+
+<i class="fa-solid fa-microphone"></i>
+
+<span>
+
+Voice
+
+</span>
+
+</button>
+
+<button
+class="nav-btn"
+onclick="showPage('reminderPage',this)">
+
+<i class="fa-solid fa-clock"></i>
+
+<span>
+
+Reminder
+
+</span>
+
+</button>
+
+</nav>
+
+</div>
+
+<script type="module" src="user-ui.js"></script>
+
+</body>
+
+</html>
