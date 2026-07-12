@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Activated</title>
+
+    <link rel="stylesheet" href="emergency.css">
+</head>
+
+<body>
+
+    <div class="overlay">
+
+        <div class="top">
+            <h1>EMERGENCY<br>ACTIVATED</h1>
+
+            <p>
+                <span class="dot"></span>
+                Sharing Location with Contacts
+            </p>
+        </div>
+
+        <div class="circle-container">
+
+            <div class="outer-ring"></div>
+
+            <div class="middle-ring">
+
+                <div class="inner-circle">
+
+                    <div class="star">*</div>
+
+                    <div id="timer">0</div>
+
+                    <span>SECONDS</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="location-card">
+
+            <div class="location-left">
+
+                <div class="icon">📍</div>
+
+                <div>
+                    <small>Current Location</small>
+                    <h3 id="locationText">Getting Location...</h3>
+                </div>
+
+            </div>
+
+            <div class="arrow">↗</div>
+
+        </div>
+
+        <button class="cancel-btn">
+            ✕ Cancel SOS
+        </button>
+
+        <div class="footer">
+            Tap to abort if this was a mistake
+        </div>
+
+    </div>
+
+    <script src="emergency.js"></script>
+
+</body>
+
+</html>
