@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SafeHer Watch — Emergency SOS</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      .sos-wrap {
+        position: relative;
+        width: 120px;
+        height: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .sos-ring {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 59, 48, 0.35),
+          transparent 70%
+        );
+      }
+      .sos-ring::before,
+      .sos-ring::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        box-shadow: 0 0 0 0 rgba(255, 59, 48, 0.35);
+        animation: sosRing 2.2s ease-out infinite;
+      }
+      .sos-ring::after {
+        animation-delay: 1.1s;
+      }
+      @keyframes sosRing {
+        0% {
+          box-shadow: 0 0 0 0 rgba(255, 59, 48, 0.35);
+        }
+        100% {
+          box-shadow: 0 0 0 26px rgba(255, 59, 48, 0);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .sos-ring::before,
+        .sos-ring::after {
+          animation: none;
+        }
+      }
+
+      .sos-circle {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: linear-gradient(
+          155deg,
+          #ff8a7a,
+          var(--red) 55%,
+          var(--red-dark)
+        );
+        box-shadow:
+          0 10px 24px -6px rgba(255, 59, 48, 0.6),
+          inset 0 1px 1px rgba(255, 255, 255, 0.25);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 2;
+        font-size: 26px;
+        font-weight: 800;
+        color: #fff;
+        letter-spacing: 0.5px;
+      }
+
+      .status-row {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11.5px;
+        font-weight: 700;
+        color: var(--ink-dim);
+      }
+      .status-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--ink-faint);
+        flex-shrink: 0;
+      }
+      .status-dot.on {
+        background: var(--green);
+        box-shadow: 0 0 0 3px rgba(47, 191, 98, 0.25);
+      }
+      .status-dot.pending {
+        background: var(--orange);
+        animation: blinkDot 1s ease-in-out infinite;
+      }
+      .status-dot.off {
+        background: var(--red);
+      }
+      @keyframes blinkDot {
+        50% {
+          opacity: 0.3;
+        }
+      }
+
+      .state {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+      .state.active {
+        display: flex;
+      }
+
+      .coords {
+        font-size: 11px;
+        color: var(--ink-faint);
+        font-weight: 600;
+        letter-spacing: 0.2px;
+      }
+    </style>
+  </head>
+  <body class="bg-sos">
+    <div class="ambient"><span class="b1"></span><span class="b2"></span></div>
+
+    <div class="watch">
+      <div class="screen">
+        <button
+          class="back-btn"
+          onclick="SafeHer.go('index.html')"
+          aria-label="Back to home"
+        >
+          <svg viewBox="0 0 24 24" fill="none">
+            <path
+              d="M15 5l-7 7 7 7"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+
+        <div class="statusbar">
+          <span data-clock>10:30 AM</span>
+          <span class="battery">
+            <span class="battery-body"
+              ><span class="battery-fill" data-battery-fill></span
+            ></span>
+            <span class="battery-tip"></span>
+          </span>
+        </div>
+
+        <div class="content">
+          <!-- STATE 1: ready -->
+          <div class="state active" data-state="ready">
+            <div class="sos-wrap">
+              <span class="sos-ring"></span>
+              <div class="sos-circle">SOS</div>
+            </div>
+            <p class="title">Emergency</p>
+            <p class="subtitle">Tap the button below<br />to call for help</p>
+
+            <div class="status-row">
+              <span class="status-dot" data-loc-dot></span>
+              <span data-loc-status>Locating you…</span>
+            </div>
+
+            <button class="pill-btn red" data-call-btn>
+              <svg viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.5.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4.1c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.2 1L6.6 10.8Z"
+                  fill="#fff"
+                />
+              </svg>
+              Call Now
+            </button>
+          </div>
+
+          <!-- STATE 2: alert sent -->
+          <div class="state" data-state="sent">
+            <div
+              class="icon-circle"
+              style="
+                background: linear-gradient(
+                  155deg,
+                  #3ddb77,
+                  var(--green) 55%,
+                  var(--green-dark)
+                );
+              "
+            >
+              <svg viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M12 21s-7-5.1-9.3-9.3C1 8.7 2.2 5.4 5.3 4.5c1.9-.6 3.9.1 5 1.7l1.7 2.4 1.7-2.4c1.1-1.6 3.1-2.3 5-1.7 3.1.9 4.3 4.2 2.6 7.2C19 15.9 12 21 12 21Z"
+                  stroke="#fff"
+                  stroke-width="1.6"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <p class="title">Help is on the way</p>
+            <p class="subtitle">
+              Calling emergency contact and<br />your live location was sent to
+              admin
+            </p>
+            <p class="coords" data-coords-out>—</p>
+            <button class="pill-btn ghost" onclick="SafeHer.go('index.html')">
+              Back to home
+            </button>
+          </div>
+        </div>
+
+        <div class="toast" data-toast>
+          <span class="dot"></span><span data-toast-text></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-caption">SafeHer &nbsp;·&nbsp; emergency SOS</div>
+
+    <script src="js/app.js"></script>
+    <script src="js/sos.js"></script>
+  </body>
+</html>

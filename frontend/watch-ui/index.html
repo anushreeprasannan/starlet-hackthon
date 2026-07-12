@@ -2,335 +2,255 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SafeHer Watch — Home</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      .grid {
+        width: 100%;
+        height: 100%;
+        padding: 44px 12px 12px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto auto;
+        gap: 9px;
+      }
+      .tile {
+        appearance: none;
+        border: none;
+        cursor: pointer;
+        border-radius: 22px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 14px 8px;
+        font-family: inherit;
+        color: #fff;
+        text-align: center;
+        transition:
+          transform 0.12s ease,
+          filter 0.12s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .tile:active {
+        transform: scale(0.94);
+        filter: brightness(0.9);
+      }
+      .tile:focus-visible {
+        outline: 2px solid #fff;
+        outline-offset: 2px;
+      }
+      .tile svg {
+        width: 28px;
+        height: 28px;
+      }
+      .tile-label {
+        font-size: 12.5px;
+        font-weight: 700;
+        line-height: 1.2;
+      }
 
-    <title>Guardian Angel</title>
+      .tile-mail {
+        grid-column: 1;
+        grid-row: 1;
+        background: linear-gradient(
+          155deg,
+          #8b7bf5,
+          var(--purple) 55%,
+          var(--purple-dark)
+        );
+      }
+      .tile-remind {
+        grid-column: 2;
+        grid-row: 1;
+        background: linear-gradient(
+          155deg,
+          #ffc266,
+          var(--orange) 55%,
+          var(--orange-dark)
+        );
+      }
+      .tile-sos {
+        grid-column: 1 / span 2;
+        grid-row: 2;
+        background: linear-gradient(
+          155deg,
+          #ff5347,
+          var(--red) 55%,
+          var(--red-dark)
+        );
+        flex-direction: row;
+        gap: 12px;
+        padding: 14px 18px;
+        box-shadow: 0 10px 22px -8px rgba(255, 59, 48, 0.55);
+      }
+      .tile-sos .sos-word {
+        font-size: 22px;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+      }
+      .tile-sos .sos-sub {
+        font-size: 11.5px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.85);
+      }
+      .tile-sos .sos-text {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1px;
+      }
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+      .tile-settings {
+        grid-column: 1 / span 2;
+        grid-row: 3;
+        background: var(--tile-dark);
+        flex-direction: row;
+        gap: 10px;
+        padding: 12px;
+      }
+      .tile-settings:active {
+        filter: brightness(1.3);
+      }
+      .tile-settings .tile-label {
+        font-size: 13.5px;
+      }
 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-
-    <link rel="stylesheet" href="user-ui.css" />
-
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-    />
+      /* subtle sos pulse ring to invite attention, matches emergency framing */
+      .tile-sos::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 22px;
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.35);
+        animation: sosPulse 2.6s ease-out infinite;
+        pointer-events: none;
+      }
+      @keyframes sosPulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.28);
+        }
+        70% {
+          box-shadow: 0 0 0 14px rgba(255, 255, 255, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .tile-sos::after {
+          animation: none;
+        }
+      }
+    </style>
   </head>
-
-  <body>
-    <div class="background-blobs">
-      <div class="blob blob1"></div>
-      <div class="blob blob2"></div>
-      <div class="blob blob3"></div>
+  <body class="bg-home">
+    <div class="ambient">
+      <span class="b1"></span><span class="b2"></span><span class="b3"></span>
     </div>
 
-    <div class="container">
-      <!-- ========================= -->
-
-      <!-- HEADER -->
-
-      <!-- ========================= -->
-
-      <header class="top-header">
-        <div class="logo-area">
-          <div class="logo">
-            <i class="fa-solid fa-shield-heart"></i>
-          </div>
-
-          <div>
-            <h1>Guardian Angel</h1>
-
-            <p>Your Safety Companion</p>
-          </div>
+    <div class="watch">
+      <div class="screen">
+        <div class="statusbar">
+          <span data-clock>10:30 AM</span>
+          <span class="battery">
+            <span class="battery-body"
+              ><span class="battery-fill" data-battery-fill></span
+            ></span>
+            <span class="battery-tip"></span>
+          </span>
         </div>
 
-        <div class="status-area">
-          <div class="status-card">
-            <i class="fa-solid fa-clock"></i>
-
-            <span id="liveTime">10:00 AM</span>
-          </div>
-
-          <div class="status-card">
-            <i class="fa-solid fa-calendar-days"></i>
-
-            <span id="liveDate">12 July 2026</span>
-          </div>
-
-          <div class="status-card">
-            <i class="fa-solid fa-battery-three-quarters"></i>
-
-            <span>87%</span>
-          </div>
-
-          <div class="status-card">
-            <i class="fa-solid fa-signal"></i>
-
-            <span>4G</span>
-          </div>
-
-          <img src="https://i.pravatar.cc/100?img=12" class="profile" />
-        </div>
-      </header>
-
-      <!-- ========================= -->
-
-      <!-- MAIN CONTENT -->
-
-      <!-- ========================= -->
-
-      <main>
-        <!-- ================================= -->
-
-        <!-- HOME PAGE -->
-
-        <!-- ================================= -->
-
-        <section id="homePage" class="page active">
-          <div class="welcome-card">
-            <div>
-              <h2 id="greeting">Good Morning</h2>
-
-              <p>Welcome back. Everything looks safe today.</p>
-            </div>
-
-            <div class="welcome-avatar">
-              <img src="https://i.pravatar.cc/120?img=12" />
-            </div>
-          </div>
-
-          <div class="quick-title">Quick Actions</div>
-
-          <div class="quick-grid">
-            <!-- SOS -->
-
-            <div class="action-card emergency" onclick="showPage('sosPage')">
-              <div class="icon">
-                <i class="fa-solid fa-triangle-exclamation"></i>
-              </div>
-
-              <h3>Emergency SOS</h3>
-
-              <p>Send your live location to caregivers instantly.</p>
-            </div>
-
-            <!-- Voice -->
-
-            <div class="action-card" onclick="showPage('voicePage')">
-              <div class="icon">
-                <i class="fa-solid fa-microphone"></i>
-              </div>
-
-              <h3>Voice Message</h3>
-
-              <p>Record a message instead of typing.</p>
-            </div>
-
-            <!-- Reminder -->
-
-            <div class="action-card" onclick="showPage('reminderPage')">
-              <div class="icon">
-                <i class="fa-solid fa-clock"></i>
-              </div>
-
-              <h3>Daily Reminders</h3>
-
-              <p>Never miss medication or important routines.</p>
-            </div>
-          </div>
-
-          <div class="tips-card">
-            <h3>Today's Health Tip</h3>
-
-            <p>Drink enough water and take a short walk if possible.</p>
-          </div>
-        </section>
-
-        <!-- ================================= -->
-
-        <!-- SOS PAGE -->
-
-        <!-- ================================= -->
-
-        <section id="sosPage" class="page">
-          <div class="page-title">Emergency SOS</div>
-
-          <div class="sos-container">
-            <div class="pulse-ring"></div>
-
-            <div class="pulse-ring delay"></div>
-
-            <button id="sosButton">
-              <div class="heart">
-                <i class="fa-solid fa-heart-pulse"></i>
-              </div>
-
-              <span> SOS </span>
-            </button>
-          </div>
-
-          <p class="sos-text">
-            Tap once to send your live location immediately.
-          </p>
-
-          <div class="location-box">
-            <h3>Emergency Status</h3>
-
-            <p>
-              Latitude :
-              <span id="latitude">--</span>
-            </p>
-
-            <p>
-              Longitude :
-              <span id="longitude">--</span>
-            </p>
-
-            <p>
-              Time :
-              <span id="timestamp">--</span>
-            </p>
-
-            <p>
-              Status :
-              <span id="status"> Waiting... </span>
-            </p>
-          </div>
-
-          <button class="back-btn" onclick="showPage('homePage')">
-            <i class="fa-solid fa-arrow-left"></i>
-
-            Back Home
+        <div class="grid">
+          <button
+            class="tile tile-mail"
+            onclick="SafeHer.go('voice-message.html')"
+            aria-label="Send voice mail to admin"
+          >
+            <svg viewBox="0 0 24 24" fill="none">
+              <path
+                d="M3 6.5A2.5 2.5 0 0 1 5.5 4h13A2.5 2.5 0 0 1 21 6.5v11a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5v-11Z"
+                stroke="#fff"
+                stroke-width="1.8"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M4 7l7.35 5.51a1 1 0 0 0 1.2 0L20 7"
+                stroke="#fff"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <span class="tile-label">Send Mail to<br />Admin</span>
           </button>
-        </section>
-      </main>
-    </div>
-  </body>
-</html>
 
+          <button
+            class="tile tile-remind"
+            onclick="SafeHer.go('reminder.html')"
+            aria-label="Open reminders"
+          >
+            <svg viewBox="0 0 24 24" fill="none">
+              <path
+                d="M18 8a6 6 0 1 0-12 0c0 4.5-1.5 6-1.5 6h15S18 12.5 18 8Z"
+                stroke="#fff"
+                stroke-width="1.8"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M13.7 20a2 2 0 0 1-3.4 0"
+                stroke="#fff"
+                stroke-width="1.8"
+                stroke-linecap="round"
+              />
+            </svg>
+            <span class="tile-label">Reminders</span>
+          </button>
 
-<!-- ================================= -->
+          <button
+            class="tile tile-sos"
+            onclick="SafeHer.go('sos.html')"
+            aria-label="Open emergency SOS"
+          >
+            <span class="sos-text">
+              <span class="sos-word">SOS</span>
+              <span class="sos-sub">Emergency SOS</span>
+            </span>
+          </button>
 
-<!-- VOICE MESSAGE PAGE -->
-
-<!-- ================================= -->
-
-<section
-id="voicePage"
-class="page">
-
-    <div class="page-title">
-
-        Voice Message
-
-    </div>
-
-    <div class="voice-container">
-
-        <div id="micAnimation" class="mic-circle">
-
-            <i class="fa-solid fa-microphone"></i>
-
+          <button
+            class="tile tile-settings"
+            onclick="openSettings()"
+            aria-label="Settings"
+          >
+            <svg viewBox="0 0 24 24" fill="none">
+              <path
+                d="M12 15.2a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4Z"
+                stroke="#fff"
+                stroke-width="1.7"
+              />
+              <path
+                d="M19.8 13.2a1.6 1.6 0 0 0 .3 1.76l.05.06a1.9 1.9 0 1 1-2.7 2.7l-.05-.05a1.6 1.6 0 0 0-1.76-.3 1.6 1.6 0 0 0-.96 1.45v.15a1.9 1.9 0 1 1-3.8 0v-.08a1.6 1.6 0 0 0-1.04-1.46 1.6 1.6 0 0 0-1.76.3l-.05.05a1.9 1.9 0 1 1-2.7-2.7l.05-.05a1.6 1.6 0 0 0 .3-1.76 1.6 1.6 0 0 0-1.45-.96H4a1.9 1.9 0 1 1 0-3.8h.08A1.6 1.6 0 0 0 5.54 7.5a1.6 1.6 0 0 0-.3-1.76l-.05-.05a1.9 1.9 0 1 1 2.7-2.7l.05.05a1.6 1.6 0 0 0 1.76.3h.07a1.6 1.6 0 0 0 .96-1.45V1.7a1.9 1.9 0 1 1 3.8 0v.08a1.6 1.6 0 0 0 .96 1.45h.07a1.6 1.6 0 0 0 1.76-.3l.05-.05a1.9 1.9 0 1 1 2.7 2.7l-.05.05a1.6 1.6 0 0 0-.3 1.76v.07a1.6 1.6 0 0 0 1.45.96h.15a1.9 1.9 0 1 1 0 3.8h-.08a1.6 1.6 0 0 0-1.45.96Z"
+                stroke="#fff"
+                stroke-width="1.3"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <span class="tile-label">Settings</span>
+          </button>
         </div>
 
-        <div id="waveform" class="waveform">
-
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-
+        <div class="toast" data-toast>
+          <span class="dot"></span><span data-toast-text></span>
         </div>
-
-        <div id="recordTime" class="record-time">
-
-            00 : 00
-
-        </div>
-
-        <div class="voice-buttons">
-
-            <button id="startBtn" class="primary-btn">
-
-                <i class="fa-solid fa-circle"></i>
-
-                Start
-
-            </button>
-
-            <button id="stopBtn" class="danger-btn">
-
-                <i class="fa-solid fa-stop"></i>
-
-                Stop
-
-            </button>
-
-        </div>
-
-        <div class="voice-buttons">
-
-            <button id="playBtn">
-
-                <i class="fa-solid fa-play"></i>
-
-                Play
-
-            </button>
-
-            <button id="deleteBtn">
-
-                <i class="fa-solid fa-trash"></i>
-
-                Delete
-
-            </button>
-
-            <button id="sendBtn">
-
-                <i class="fa-solid fa-paper-plane"></i>
-
-                Send
-
-            </button>
-
-        </div>
-
-        <audio id="audioPlayer" controls></audio>
-
+      </div>
     </div>
 
-</section>
-
-<!-- ================================= -->
-
-<!-- REMINDER PAGE -->
-
-<!-- ================================= -->
-
-<section
-id="reminderPage"
-class="page">
-
-    <div class="page-title">
-
-        Daily Reminders
-
-    </div>
-
-    <div id="reminderContainer"
-         class="reminder-grid">
-
+    <div class="page-caption">
+      SafeHer &nbsp;·&nbsp; tap a tile to open that screen
     </div>
 
 </section>
