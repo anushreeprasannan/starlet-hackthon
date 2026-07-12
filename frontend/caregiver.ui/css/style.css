@@ -1,0 +1,169 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #eef2f8;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.phone {
+    width: 390px;
+    background: white;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .2);
+}
+
+.header {
+    background: #1f64ff;
+    color: white;
+    padding: 18px;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.form {
+    padding: 15px;
+    background: #f8f9fc;
+}
+
+.form h3 {
+    margin-bottom: 10px;
+    color: #1f64ff;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    outline: none;
+    font-size: 14px;
+}
+
+textarea {
+    resize: none;
+    height: 70px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: #1f64ff;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #004ee4;
+}
+
+.profile {
+    padding: 20px;
+    text-align: center;
+}
+
+.avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: #dfe8ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    margin: auto;
+    border: 4px solid #1f64ff;
+}
+
+.profile h2 {
+    margin-top: 12px;
+}
+
+.status {
+    color: green;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.section-title {
+    padding: 15px;
+    font-weight: bold;
+    color: #1f64ff;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 0 15px;
+}
+
+.card {
+    background: #f6f7fb;
+    padding: 15px;
+    border-radius: 15px;
+}
+
+.card small {
+    color: gray;
+}
+
+.value {
+    margin-top: 8px;
+    font-size: 26px;
+    font-weight: bold;
+    color: #1f64ff;
+}
+
+.single-card {
+    margin: 15px;
+    padding: 15px;
+    background: #f6f7fb;
+    border-radius: 15px;
+}
+
+.single-card h4 {
+    margin-bottom: 10px;
+    color: #1f64ff;
+}
+
+.download {
+    margin: 15px;
+}
+
+.bottom {
+    margin-top: 20px;
+    padding: 12px;
+    background: #1f64ff;
+    display: flex;
+    justify-content: space-around;
+    color: white;
+    font-size: 14px;
+}
+
+.bottom div {
+    text-align: center;
+}
+
+@media (max-width:420px) {
+
+    .phone {
+        width: 100%;
+        border-radius: 0;
+    }
+
+}
