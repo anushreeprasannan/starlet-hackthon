@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SafeHer Watch — Take Medicine</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      .btn-row {
+        display: flex;
+        gap: 8px;
+        width: 100%;
+      }
+      .btn-row .pill-btn {
+        flex-direction: column;
+        gap: 4px;
+        padding: 14px 8px;
+        font-size: 13px;
+      }
+      .btn-row .pill-btn svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .state {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+      .state.active {
+        display: flex;
+      }
+
+      .med-time {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--orange);
+        margin: 0 0 2px;
+      }
+    </style>
+  </head>
+  <body class="bg-reminder">
+    <div class="ambient"><span class="b1"></span><span class="b2"></span></div>
+
+    <div class="watch">
+      <div class="screen">
+        <button
+          class="back-btn"
+          onclick="SafeHer.go('index.html')"
+          aria-label="Back to home"
+        >
+          <svg viewBox="0 0 24 24" fill="none">
+            <path
+              d="M15 5l-7 7 7 7"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+
+        <div class="statusbar">
+          <span data-clock>10:30 AM</span>
+          <span class="battery">
+            <span class="battery-body"
+              ><span class="battery-fill" data-battery-fill></span
+            ></span>
+            <span class="battery-tip"></span>
+          </span>
+        </div>
+
+        <div class="content">
+          <!-- STATE 1: active reminder -->
+          <div class="state active" data-state="due">
+            <div
+              class="icon-circle"
+              style="
+                background: linear-gradient(
+                  155deg,
+                  #ffc266,
+                  var(--orange) 55%,
+                  var(--orange-dark)
+                );
+              "
+            >
+              <svg viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M9 3h6v3H9V3Z"
+                  stroke="#fff"
+                  stroke-width="1.8"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M7 6h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z"
+                  stroke="#fff"
+                  stroke-width="1.8"
+                  stroke-linejoin="round"
+                />
+                <path d="M6 13.5h12" stroke="#fff" stroke-width="1.8" />
+                <circle
+                  cx="17"
+                  cy="17.2"
+                  r="3.6"
+                  fill="var(--orange-dark)"
+                  stroke="#fff"
+                  stroke-width="1.4"
+                />
+                <path
+                  d="M15.2 19l3.6-3.6"
+                  stroke="#fff"
+                  stroke-width="1.4"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </div>
+            <p class="title">Take Medicine</p>
+            <p class="med-time" data-med-time>10:30 AM</p>
+
+            <div class="btn-row">
+              <button class="pill-btn green" data-done-btn>
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M5 13l4.5 4.5L19 8"
+                    stroke="#fff"
+                    stroke-width="2.4"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                Done
+              </button>
+              <button
+                class="pill-btn"
+                style="
+                  background: linear-gradient(
+                    155deg,
+                    #ffc266,
+                    var(--orange) 55%,
+                    var(--orange-dark)
+                  );
+                "
+                data-snooze-btn
+              >
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M8 6h8l-8 11h8"
+                    stroke="#fff"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                Snooze 10 min
+              </button>
+            </div>
+          </div>
+
+          <!-- STATE 2: marked done -->
+          <div class="state" data-state="done">
+            <div
+              class="icon-circle"
+              style="
+                background: linear-gradient(
+                  155deg,
+                  #3ddb77,
+                  var(--green) 55%,
+                  var(--green-dark)
+                );
+              "
+            >
+              <svg viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M5 13l4.5 4.5L19 8"
+                  stroke="#fff"
+                  stroke-width="2.4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <p class="title">Nicely done</p>
+            <p class="subtitle">
+              Marked as taken<br />at <span data-done-time>10:30 AM</span>
+            </p>
+            <button class="pill-btn ghost" onclick="SafeHer.go('index.html')">
+              Back to home
+            </button>
+          </div>
+
+          <!-- STATE 3: snoozed -->
+          <div class="state" data-state="snoozed">
+            <div class="icon-circle" style="background: var(--tile-dark)">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M12 7v5l3.2 2"
+                  stroke="#fff"
+                  stroke-width="1.9"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <circle
+                  cx="12"
+                  cy="13"
+                  r="8"
+                  stroke="#fff"
+                  stroke-width="1.7"
+                />
+                <path
+                  d="M9 2h6M12 2v2"
+                  stroke="#fff"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </div>
+            <p class="title">Snoozed</p>
+            <p class="subtitle">We'll remind you again<br />in 10 minutes</p>
+            <button class="pill-btn ghost" onclick="SafeHer.go('index.html')">
+              Back to home
+            </button>
+          </div>
+        </div>
+
+        <div class="toast" data-toast>
+          <span class="dot"></span><span data-toast-text></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-caption">SafeHer &nbsp;·&nbsp; medicine reminder</div>
+
+    <script src="js/app.js"></script>
+    <script src="js/reminder.js"></script>
+  </body>
+</html>

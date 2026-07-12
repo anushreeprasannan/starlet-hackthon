@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SafeHer Watch — Send Message to Admin</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      .mic-wrap {
+        position: relative;
+        width: 120px;
+        height: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 2px 0 0;
+      }
+      .mic-ring {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(108, 92, 231, 0.35),
+          transparent 70%
+        );
+        opacity: 0;
+        transform: scale(1);
+      }
+      .mic-btn {
+        appearance: none;
+        border: none;
+        cursor: pointer;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: linear-gradient(
+          155deg,
+          #8b7bf5,
+          var(--purple) 55%,
+          var(--purple-dark)
+        );
+        box-shadow:
+          0 10px 24px -6px rgba(108, 92, 231, 0.6),
+          inset 0 1px 1px rgba(255, 255, 255, 0.25);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 2;
+        transition: transform 0.15s ease;
+      }
+      .mic-btn:active {
+        transform: scale(0.94);
+      }
+      .mic-btn svg {
+        width: 40px;
+        height: 40px;
+      }
+
+      .mic-btn.recording {
+        background: linear-gradient(
+          155deg,
+          #ff8a7a,
+          var(--red) 55%,
+          var(--red-dark)
+        );
+        box-shadow:
+          0 10px 24px -6px rgba(255, 59, 48, 0.6),
+          inset 0 1px 1px rgba(255, 255, 255, 0.25);
+      }
+      .mic-btn.recording .mic-ring {
+        animation: none;
+      }
+
+      @keyframes pulseRing {
+        0% {
+          transform: scale(0.9);
+          opacity: 0.55;
+        }
+        100% {
+          transform: scale(1.55);
+          opacity: 0;
+        }
+      }
+      .mic-wrap.is-recording .mic-ring {
+        opacity: 1;
+        animation: pulseRing 1.4s ease-out infinite;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .mic-wrap.is-recording .mic-ring {
+          animation: none;
+        }
+      }
+
+      .timer {
+        font-variant-numeric: tabular-nums;
+        font-size: 22px;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+        margin-top: 2px;
+        min-height: 26px;
+      }
+
+      .waveform {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        height: 22px;
+        margin-top: 2px;
+      }
+      .waveform span {
+        width: 3px;
+        border-radius: 2px;
+        background: var(--purple);
+        height: 4px;
+        transition: height 0.12s ease;
+      }
+
+      .hint {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--ink-dim);
+        margin-top: 0;
+      }
+
+      .review-actions {
+        display: flex;
+        gap: 8px;
+        width: 100%;
+      }
+      .review-actions .pill-btn {
+        font-size: 13px;
+        padding: 11px 10px;
+      }
+
+      .state {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+      .state.active {
+        display: flex;
+      }
+    </style>
+  </head>
+  <body class="bg-voice">
+    <div class="ambient"><span class="b1"></span><span class="b2"></span></div>
+
+    <div class="watch">
+      <div class="screen">
+        <button
+          class="back-btn"
+          onclick="SafeHer.go('index.html')"
+          aria-label="Back to home"
+        >
+          <svg viewBox="0 0 24 24" fill="none">
+            <path
+              d="M15 5l-7 7 7 7"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+
+        <div class="statusbar">
+          <span data-clock>10:30 AM</span>
+          <span class="battery">
+            <span class="battery-body"
+              ><span class="battery-fill" data-battery-fill></span
+            ></span>
+            <span class="battery-tip"></span>
+          </span>
+        </div>
+
+        <div class="content">
+          <!-- STATE 1: idle, ready to record -->
+          <div class="state active" data-state="idle">
+            <p class="title">Send message<br />to admin</p>
+
+            <div class="mic-wrap" data-mic-wrap>
+              <span class="mic-ring"></span>
+              <button class="mic-btn" data-mic-btn aria-label="Tap to speak">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M12 15.5a3.5 3.5 0 0 0 3.5-3.5V6a3.5 3.5 0 1 0-7 0v6a3.5 3.5 0 0 0 3.5 3.5Z"
+                    stroke="#fff"
+                    stroke-width="1.9"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M6.5 11a5.5 5.5 0 0 0 11 0"
+                    stroke="#fff"
+                    stroke-width="1.9"
+                    stroke-linecap="round"
+                  />
+                  <path
+                    d="M12 16.5V20M9.5 20h5"
+                    stroke="#fff"
+                    stroke-width="1.9"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            <p class="hint" data-hint>Tap to speak</p>
+
+            <button class="pill-btn ghost" onclick="SafeHer.go('index.html')">
+              <svg viewBox="0 0 24 24" fill="none">
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="9"
+                  stroke="#fff"
+                  stroke-width="1.8"
+                />
+                <path
+                  d="M9 9l6 6M15 9l-6 6"
+                  stroke="#fff"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                />
+              </svg>
+              Cancel
+            </button>
+          </div>
+
+          <!-- STATE 2: reviewing a finished recording -->
+          <div class="state" data-state="review">
+            <p class="title">Ready to send</p>
+            <p class="subtitle">
+              Message recorded — <span data-final-time>0:00</span>
+            </p>
+
+            <div class="waveform" data-review-wave aria-hidden="true"></div>
+
+            <div class="review-actions">
+              <button class="pill-btn ghost" data-play-btn>
+                <svg viewBox="0 0 24 24" fill="none" data-play-icon>
+                  <path d="M7 5.5v13l11-6.5-11-6.5Z" fill="#fff" />
+                </svg>
+                Play
+              </button>
+              <button class="pill-btn ghost" data-redo-btn>
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M4 5v5h5M20 19v-5h-5"
+                    stroke="#fff"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M5.1 15A8 8 0 1 0 6 8"
+                    stroke="#fff"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                  />
+                </svg>
+                Redo
+              </button>
+            </div>
+            <button class="pill-btn purple" data-send-btn>
+              <svg viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M4 12l16-7-6 16-3-6-7-3Z"
+                  stroke="#fff"
+                  stroke-width="1.7"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              Send to Admin
+            </button>
+          </div>
+
+          <!-- STATE 3: sending -->
+          <div class="state" data-state="sending">
+            <div class="mic-wrap">
+              <span
+                class="mic-ring"
+                style="opacity: 1; animation: pulseRing 1s ease-out infinite"
+              ></span>
+              <div class="mic-btn" style="cursor: default">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M4 12l16-7-6 16-3-6-7-3Z"
+                    stroke="#fff"
+                    stroke-width="1.7"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+            </div>
+            <p class="title">Sending&hellip;</p>
+            <p class="hint">Delivering voice message to admin</p>
+          </div>
+
+          <!-- STATE 4: sent confirmation -->
+          <div class="state" data-state="sent">
+            <div
+              class="icon-circle"
+              style="
+                background: linear-gradient(
+                  155deg,
+                  #3ddb77,
+                  var(--green) 55%,
+                  var(--green-dark)
+                );
+              "
+            >
+              <svg viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M5 13l4.5 4.5L19 8"
+                  stroke="#fff"
+                  stroke-width="2.4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <p class="title">Message sent</p>
+            <p class="subtitle">Admin will be notified<br />right away</p>
+            <button class="pill-btn ghost" onclick="SafeHer.go('index.html')">
+              Done
+            </button>
+          </div>
+
+          <!-- STATE 5: mic permission / error -->
+          <div class="state" data-state="error">
+            <div class="icon-circle" style="background: var(--tile-dark)">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M12 8v5M12 16h.01"
+                  stroke="#fff"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="9"
+                  stroke="#fff"
+                  stroke-width="1.6"
+                />
+              </svg>
+            </div>
+            <p class="title">Microphone blocked</p>
+            <p class="subtitle" data-error-text>
+              Allow microphone access in your browser to send a voice message.
+            </p>
+            <button class="pill-btn ghost" onclick="SafeHer.go('index.html')">
+              Back
+            </button>
+          </div>
+        </div>
+
+        <div class="toast" data-toast>
+          <span class="dot"></span><span data-toast-text></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-caption">SafeHer &nbsp;·&nbsp; voice message to admin</div>
+
+    <script src="js/app.js"></script>
+    <script src="js/voice.js"></script>
+  </body>
+</html>

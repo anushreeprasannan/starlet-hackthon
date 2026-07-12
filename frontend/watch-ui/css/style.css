@@ -1,0 +1,482 @@
+/* ============================================================
+   SafeHer Watch — shared styles
+   ============================================================ */
+
+:root {
+  --purple: #6c5ce7;
+  --purple-dark: #4834d4;
+  --purple-deep: #2e1f8f;
+  --orange: #f5a623;
+  --orange-dark: #e4780c;
+  --red: #ff3b30;
+  --red-dark: #c81e1e;
+  --green: #2fbf62;
+  --green-dark: #1f9b4c;
+  --ink: #ffffff;
+  --ink-dim: rgba(255, 255, 255, 0.62);
+  --ink-faint: rgba(255, 255, 255, 0.38);
+  --watch-bezel: #0a0a0c;
+  --watch-bezel-hi: #1c1c20;
+  --screen-bg: #000000;
+  --tile-dark: #1c1c1e;
+  --tile-dark-hi: #2c2c2e;
+
+  --radius-screen: 46px;
+  --radius-bezel: 62px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  background: #f4f4f8;
+}
+
+/* ---------- ambient page backgrounds (per screen, set via body class) ---------- */
+
+.bg-home {
+  background:
+    radial-gradient(circle at 85% 8%, rgba(108, 92, 231, 0.1), transparent 40%),
+    radial-gradient(
+      circle at 12% 85%,
+      rgba(108, 92, 231, 0.1),
+      transparent 45%
+    ),
+    linear-gradient(160deg, #f4f5fb 0%, #eef0f9 100%);
+}
+.bg-voice {
+  background:
+    radial-gradient(
+      circle at 88% 20%,
+      rgba(108, 92, 231, 0.16),
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 10% 85%,
+      rgba(108, 92, 231, 0.14),
+      transparent 45%
+    ),
+    linear-gradient(160deg, #f6f5fd 0%, #eeecfb 100%);
+}
+.bg-reminder {
+  background:
+    radial-gradient(
+      circle at 88% 15%,
+      rgba(245, 166, 35, 0.18),
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 10% 88%,
+      rgba(245, 166, 35, 0.16),
+      transparent 45%
+    ),
+    linear-gradient(160deg, #fffaf1 0%, #fdf2e0 100%);
+}
+.bg-sos {
+  background:
+    radial-gradient(
+      circle at 88% 15%,
+      rgba(255, 59, 48, 0.16),
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 10% 88%,
+      rgba(255, 59, 48, 0.14),
+      transparent 45%
+    ),
+    linear-gradient(160deg, #fff5f5 0%, #fdeaea 100%);
+}
+
+/* floating decorative dots/blobs to echo the mockups */
+.ambient {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+.ambient span {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.5;
+}
+.bg-home .ambient span.b1 {
+  width: 120px;
+  height: 120px;
+  right: 8%;
+  top: 10%;
+  background: rgba(108, 92, 231, 0.12);
+}
+.bg-home .ambient span.b2 {
+  width: 220px;
+  height: 220px;
+  right: 4%;
+  bottom: 6%;
+  background: rgba(108, 92, 231, 0.1);
+}
+.bg-home .ambient span.b3 {
+  width: 16px;
+  height: 16px;
+  left: 6%;
+  top: 38%;
+  background: rgba(108, 92, 231, 0.28);
+}
+
+.bg-voice .ambient span.b1 {
+  width: 140px;
+  height: 140px;
+  right: 6%;
+  top: 8%;
+  background: rgba(108, 92, 231, 0.16);
+}
+.bg-voice .ambient span.b2 {
+  width: 240px;
+  height: 240px;
+  right: 2%;
+  bottom: 4%;
+  background: rgba(108, 92, 231, 0.14);
+}
+
+.bg-reminder .ambient span.b1 {
+  width: 130px;
+  height: 130px;
+  right: 6%;
+  top: 6%;
+  background: rgba(245, 166, 35, 0.18);
+}
+.bg-reminder .ambient span.b2 {
+  width: 230px;
+  height: 230px;
+  right: 2%;
+  bottom: 4%;
+  background: rgba(245, 166, 35, 0.14);
+}
+
+.bg-sos .ambient span.b1 {
+  width: 130px;
+  height: 130px;
+  right: 6%;
+  top: 6%;
+  background: rgba(255, 59, 48, 0.16);
+}
+.bg-sos .ambient span.b2 {
+  width: 230px;
+  height: 230px;
+  right: 2%;
+  bottom: 4%;
+  background: rgba(255, 59, 48, 0.14);
+}
+
+/* ============================================================
+   WATCH FRAME
+   ============================================================ */
+
+.watch {
+  position: relative;
+  z-index: 1;
+  width: 368px;
+  height: 452px;
+  background: linear-gradient(
+    155deg,
+    var(--watch-bezel-hi),
+    var(--watch-bezel) 40%
+  );
+  border-radius: var(--radius-bezel);
+  padding: 14px;
+  box-shadow:
+    0 30px 60px -18px rgba(20, 10, 50, 0.35),
+    0 8px 18px -6px rgba(20, 10, 50, 0.25),
+    inset 0 1px 1px rgba(255, 255, 255, 0.08);
+}
+
+/* digital crown + side button, echoing the mockup */
+.watch::before,
+.watch::after {
+  content: "";
+  position: absolute;
+  right: -9px;
+  background: linear-gradient(180deg, #2a2a2e, #0c0c0e);
+  border-radius: 6px;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.12);
+}
+.watch::before {
+  /* crown */
+  width: 16px;
+  height: 46px;
+  top: 150px;
+  border-radius: 8px;
+}
+.watch::after {
+  /* side button */
+  width: 10px;
+  height: 64px;
+  top: 210px;
+  border-radius: 4px;
+}
+
+.screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--screen-bg);
+  border-radius: var(--radius-screen);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  color: var(--ink);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.03);
+}
+
+/* status bar */
+.statusbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px 4px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  flex-shrink: 0;
+}
+.battery {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+.battery-body {
+  width: 22px;
+  height: 11px;
+  border: 1.4px solid rgba(255, 255, 255, 0.85);
+  border-radius: 3px;
+  position: relative;
+  padding: 1.5px;
+}
+.battery-fill {
+  height: 100%;
+  width: 78%;
+  background: #30d158;
+  border-radius: 1px;
+  transition:
+    width 0.4s ease,
+    background 0.4s ease;
+}
+.battery-tip {
+  width: 2px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 0 2px 2px 0;
+}
+
+/* main content of a screen */
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 22px 22px;
+  gap: 10px;
+  text-align: center;
+}
+
+/* ============================================================
+   Reusable bits
+   ============================================================ */
+
+.icon-circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.icon-circle svg {
+  width: 46px;
+  height: 46px;
+}
+
+.title {
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0;
+}
+.subtitle {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-dim);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.pill-btn {
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 18px;
+  border-radius: 22px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease,
+    box-shadow 0.12s ease;
+}
+.pill-btn:active {
+  transform: scale(0.96);
+  filter: brightness(0.92);
+}
+.pill-btn:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+.pill-btn svg {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+}
+
+.pill-btn.ghost {
+  background: var(--tile-dark);
+  color: var(--ink);
+}
+.pill-btn.ghost:active {
+  filter: brightness(1.25);
+}
+
+.pill-btn.red {
+  background: linear-gradient(155deg, #ff5347, var(--red) 55%, var(--red-dark));
+  box-shadow: 0 8px 18px -6px rgba(255, 59, 48, 0.55);
+}
+.pill-btn.green {
+  background: linear-gradient(
+    155deg,
+    #3ddb77,
+    var(--green) 55%,
+    var(--green-dark)
+  );
+  box-shadow: 0 8px 18px -6px rgba(47, 191, 98, 0.5);
+}
+.pill-btn.purple {
+  background: linear-gradient(
+    155deg,
+    #8b7bf5,
+    var(--purple) 55%,
+    var(--purple-dark)
+  );
+  box-shadow: 0 8px 18px -6px rgba(108, 92, 231, 0.55);
+}
+
+/* status toast pinned inside the screen */
+.toast {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 14px;
+  padding: 10px 14px;
+  border-radius: 16px;
+  background: rgba(28, 28, 30, 0.94);
+  backdrop-filter: blur(6px);
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transform: translateY(140%);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 20;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+.toast.show {
+  transform: translateY(0);
+}
+.toast .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--green);
+}
+.toast.err .dot {
+  background: var(--red);
+}
+.toast.info .dot {
+  background: var(--purple);
+}
+
+/* back / close chevron top-left inside a screen */
+.back-btn {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  color: var(--ink-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 15;
+}
+.back-btn svg {
+  width: 15px;
+  height: 15px;
+}
+.back-btn:active {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* caption under the watch, page chrome */
+.page-caption {
+  position: fixed;
+  bottom: 26px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: rgba(30, 20, 60, 0.42);
+  letter-spacing: 0.2px;
+  z-index: 1;
+}
+
+@media (max-width: 420px) {
+  .watch {
+    width: 88vw;
+    height: calc(88vw * 1.228);
+    max-width: 340px;
+    max-height: 418px;
+  }
+}
