@@ -1,0 +1,108 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f3f6fb;
+    display:flex;
+    justify-content:center;
+    padding:20px;
+}
+
+.container{
+    width:380px;
+}
+
+.header{
+    background:#2F80ED;
+    color:white;
+    text-align:center;
+    padding:20px;
+    border-radius:15px;
+    margin-bottom:20px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    margin-bottom:20px;
+    box-shadow:0 3px 10px rgba(0,0,0,.1);
+}
+
+.heading{
+    margin-bottom:15px;
+}
+
+input,
+textarea{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:15px;
+}
+
+textarea{
+    resize:none;
+    height:80px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:#2F80ED;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+button:hover{
+    background:#1d6fd8;
+}
+
+.reminder{
+    background:white;
+    padding:18px;
+    border-radius:15px;
+    margin-bottom:15px;
+    box-shadow:0 3px 8px rgba(0,0,0,.1);
+}
+
+.reminder h3{
+    color:#2F80ED;
+    margin-bottom:8px;
+}
+
+.time{
+    font-weight:bold;
+    color:#444;
+}
+
+.description{
+    color:#666;
+    margin-top:10px;
+}
+
+.deleteBtn{
+    background:#e74c3c;
+    margin-top:15px;
+}
+
+.deleteBtn:hover{
+    background:#c0392b;
+}
+
+.empty{
+    text-align:center;
+    color:gray;
+    padding:20px;
+    background:white;
+    border-radius:15px;
+}
