@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Guardian Angel</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="user-ui.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="background-blobs">
+      <div class="blob blob1"></div>
+      <div class="blob blob2"></div>
+      <div class="blob blob3"></div>
+    </div>
+
+    <div class="container">
+      <!-- ========================= -->
+
+      <!-- HEADER -->
+
+      <!-- ========================= -->
+
+      <header class="top-header">
+        <div class="logo-area">
+          <div class="logo">
+            <i class="fa-solid fa-shield-heart"></i>
+          </div>
+
+          <div>
+            <h1>Guardian Angel</h1>
+
+            <p>Your Safety Companion</p>
+          </div>
+        </div>
+
+        <div class="status-area">
+          <div class="status-card">
+            <i class="fa-solid fa-clock"></i>
+
+            <span id="liveTime">10:00 AM</span>
+          </div>
+
+          <div class="status-card">
+            <i class="fa-solid fa-calendar-days"></i>
+
+            <span id="liveDate">12 July 2026</span>
+          </div>
+
+          <div class="status-card">
+            <i class="fa-solid fa-battery-three-quarters"></i>
+
+            <span>87%</span>
+          </div>
+
+          <div class="status-card">
+            <i class="fa-solid fa-signal"></i>
+
+            <span>4G</span>
+          </div>
+
+          <img src="https://i.pravatar.cc/100?img=12" class="profile" />
+        </div>
+      </header>
+
+      <!-- ========================= -->
+
+      <!-- MAIN CONTENT -->
+
+      <!-- ========================= -->
+
+      <main>
+        <!-- ================================= -->
+
+        <!-- HOME PAGE -->
+
+        <!-- ================================= -->
+
+        <section id="homePage" class="page active">
+          <div class="welcome-card">
+            <div>
+              <h2 id="greeting">Good Morning</h2>
+
+              <p>Welcome back. Everything looks safe today.</p>
+            </div>
+
+            <div class="welcome-avatar">
+              <img src="https://i.pravatar.cc/120?img=12" />
+            </div>
+          </div>
+
+          <div class="quick-title">Quick Actions</div>
+
+          <div class="quick-grid">
+            <!-- SOS -->
+
+            <div class="action-card emergency" onclick="showPage('sosPage')">
+              <div class="icon">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+              </div>
+
+              <h3>Emergency SOS</h3>
+
+              <p>Send your live location to caregivers instantly.</p>
+            </div>
+
+            <!-- Voice -->
+
+            <div class="action-card" onclick="showPage('voicePage')">
+              <div class="icon">
+                <i class="fa-solid fa-microphone"></i>
+              </div>
+
+              <h3>Voice Message</h3>
+
+              <p>Record a message instead of typing.</p>
+            </div>
+
+            <!-- Reminder -->
+
+            <div class="action-card" onclick="showPage('reminderPage')">
+              <div class="icon">
+                <i class="fa-solid fa-clock"></i>
+              </div>
+
+              <h3>Daily Reminders</h3>
+
+              <p>Never miss medication or important routines.</p>
+            </div>
+          </div>
+
+          <div class="tips-card">
+            <h3>Today's Health Tip</h3>
+
+            <p>Drink enough water and take a short walk if possible.</p>
+          </div>
+        </section>
+
+        <!-- ================================= -->
+
+        <!-- SOS PAGE -->
+
+        <!-- ================================= -->
+
+        <section id="sosPage" class="page">
+          <div class="page-title">Emergency SOS</div>
+
+          <div class="sos-container">
+            <div class="pulse-ring"></div>
+
+            <div class="pulse-ring delay"></div>
+
+            <button id="sosButton">
+              <div class="heart">
+                <i class="fa-solid fa-heart-pulse"></i>
+              </div>
+
+              <span> SOS </span>
+            </button>
+          </div>
+
+          <p class="sos-text">
+            Tap once to send your live location immediately.
+          </p>
+
+          <div class="location-box">
+            <h3>Emergency Status</h3>
+
+            <p>
+              Latitude :
+              <span id="latitude">--</span>
+            </p>
+
+            <p>
+              Longitude :
+              <span id="longitude">--</span>
+            </p>
+
+            <p>
+              Time :
+              <span id="timestamp">--</span>
+            </p>
+
+            <p>
+              Status :
+              <span id="status"> Waiting... </span>
+            </p>
+          </div>
+
+          <button class="back-btn" onclick="showPage('homePage')">
+            <i class="fa-solid fa-arrow-left"></i>
+
+            Back Home
+          </button>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
+
+
+<!-- ================================= -->
+
+<!-- VOICE MESSAGE PAGE -->
+
+<!-- ================================= -->
+
+<section
+id="voicePage"
+class="page">
+
+    <div class="page-title">
+
+        Voice Message
+
+    </div>
+
+    <div class="voice-container">
+
+        <div id="micAnimation" class="mic-circle">
+
+            <i class="fa-solid fa-microphone"></i>
+
+        </div>
+
+        <div id="waveform" class="waveform">
+
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </div>
+
+        <div id="recordTime" class="record-time">
+
+            00 : 00
+
+        </div>
+
+        <div class="voice-buttons">
+
+            <button id="startBtn" class="primary-btn">
+
+                <i class="fa-solid fa-circle"></i>
+
+                Start
+
+            </button>
+
+            <button id="stopBtn" class="danger-btn">
+
+                <i class="fa-solid fa-stop"></i>
+
+                Stop
+
+            </button>
+
+        </div>
+
+        <div class="voice-buttons">
+
+            <button id="playBtn">
+
+                <i class="fa-solid fa-play"></i>
+
+                Play
+
+            </button>
+
+            <button id="deleteBtn">
+
+                <i class="fa-solid fa-trash"></i>
+
+                Delete
+
+            </button>
+
+            <button id="sendBtn">
+
+                <i class="fa-solid fa-paper-plane"></i>
+
+                Send
+
+            </button>
+
+        </div>
+
+        <audio id="audioPlayer" controls></audio>
+
+    </div>
+
+</section>
+
+<!-- ================================= -->
+
+<!-- REMINDER PAGE -->
+
+<!-- ================================= -->
+
+<section
+id="reminderPage"
+class="page">
+
+    <div class="page-title">
+
+        Daily Reminders
+
+    </div>
+
+    <div id="reminderContainer"
+         class="reminder-grid">
+
+    </div>
+
+</section>
+
+<!-- ================================= -->
+
+<!-- SUCCESS POPUP -->
+
+<!-- ================================= -->
+
+<div
+id="successPopup"
+class="success-popup">
+
+<div class="popup-card">
+
+<i class="fa-solid fa-circle-check"></i>
+
+<h2>
+
+Emergency Alert Sent
+
+</h2>
+
+<p>
+
+Your caregivers have been notified successfully.
+
+</p>
+
+<button
+onclick="closePopup()">
+
+OK
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+
+<!-- LOADING SCREEN -->
+
+<!-- ================================= -->
+
+<div
+id="loader"
+class="loader-screen">
+
+<div class="spinner"></div>
+
+<p>
+
+Getting your location...
+
+</p>
+
+</div>
+
+</main>
+
+
+
+<nav class="bottom-nav">
+
+<button
+class="nav-btn active"
+onclick="showPage('homePage',this)">
+
+<i class="fa-solid fa-house"></i>
+
+<span>
+
+Home
+
+</span>
+
+</button>
+
+<button
+class="nav-btn"
+onclick="showPage('sosPage',this)">
+
+<i class="fa-solid fa-triangle-exclamation"></i>
+
+<span>
+
+SOS
+
+</span>
+
+</button>
+
+<button
+class="nav-btn"
+onclick="showPage('voicePage',this)">
+
+<i class="fa-solid fa-microphone"></i>
+
+<span>
+
+Voice
+
+</span>
+
+</button>
+
+<button
+class="nav-btn"
+onclick="showPage('reminderPage',this)">
+
+<i class="fa-solid fa-clock"></i>
+
+<span>
+
+Reminder
+
+</span>
+
+</button>
+
+</nav>
+
+</div>
+
+<script src="user-ui.js"></script>
+
+</body>
+
+</html>
