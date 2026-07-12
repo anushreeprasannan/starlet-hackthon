@@ -6,6 +6,11 @@
 /* -----------------------------
    DOM Elements
 ------------------------------ */
+import {
+    saveLocation,
+    sendSOS,
+    saveMedicalHistory
+} from "../../firebase/firestore.js";
 
 const pages = document.querySelectorAll(".page");
 
