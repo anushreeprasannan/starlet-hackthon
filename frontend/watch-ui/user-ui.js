@@ -6,6 +6,12 @@
 /* -----------------------------
    DOM Elements
 ------------------------------ */
+import {
+    saveLocation,
+    sendSOS,
+    saveMedicalHistory
+} from "../../firebase/firestore.js";
+const USER_ID = "user001";
 
 const pages = document.querySelectorAll(".page");
 
@@ -116,31 +122,23 @@ function getLocation() {
    GPS SUCCESS
 ========================================== */
 
-function locationSuccess(position) {
-  loader.style.display = "none";
+async function locationSuccess(position) {
+    loader.style.display = "none";
 
-  const lat = position.coords.latitude;
-  const lng = position.coords.longitude;
+    const lat = position.coords.latitude;
+    const lng = position.coords.longitude;
 
-  latitude.innerHTML = lat.toFixed(6);
+    latitude.innerHTML = lat.toFixed(6);
+    longitude.innerHTML = lng.toFixed(6);
 
-  longitude.innerHTML = lng.toFixed(6);
+    timestamp.innerHTML = new Date().toLocaleString();
+    status.innerHTML = "Location Successfully Obtained";
 
-  timestamp.innerHTML = new Date().toLocaleString();
+    await saveLocation(USER_ID, lat, lng);
 
-  status.innerHTML = "Location Successfully Obtained";
+    await sendSOS(USER_ID, lat, lng);
 
-  const location = {
-    latitude: lat,
-
-    longitude: lng,
-
-    time: new Date().toISOString(),
-  };
-
-  sendSOS(location);
-
-  popup.style.display = "flex";
+    popup.style.display = "flex";
 }
 
 /* ==========================================
@@ -185,11 +183,6 @@ function closePopup() {
    Placeholder Backend
 ========================================== */
 
-function sendSOS(location) {
-  console.log("SOS Sent");
-
-  console.log(location);
-}
 
 /* Firebase later
 
